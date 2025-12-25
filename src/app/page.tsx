@@ -1,11 +1,10 @@
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "ApniSec - #1 Cyber Security & VAPT Services",
   description: "Elevate your security posture with ApniSec. Trusted by 100+ organizations for Cloud Security and Vulnerability Assessments.",
 };
-
-import Link from "next/link";
 
 export default function LandingPage() {
   return (
@@ -26,26 +25,26 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Nav Links (Hidden on Mobile for simplicity) */}
+          {/* Nav Links */}
           <div className="hidden items-center gap-8 md:flex">
-            <Link href="#" className="text-sm font-medium text-[#00ffa3]">
+            <Link href="/" className="text-sm font-medium text-[#00ffa3]">
               Home
             </Link>
             <Link
-              href="#"
-              className="text-sm font-medium text-gray-300 hover:text-white"
+              href="/demo"
+              className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
             >
               vCISO
             </Link>
             <Link
-              href="#"
-              className="text-sm font-medium text-gray-300 hover:text-white"
+              href="/demo"
+              className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
             >
               Cloud Security
             </Link>
             <Link
-              href="#"
-              className="text-sm font-medium text-gray-300 hover:text-white"
+              href="/demo"
+              className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
             >
               VAPT
             </Link>
@@ -55,12 +54,12 @@ export default function LandingPage() {
           <div className="flex items-center gap-4">
             <Link
               href="/login"
-              className="text-sm font-medium text-white hover:text-[#00ffa3]"
+              className="text-sm font-medium text-white hover:text-[#00ffa3] transition-colors"
             >
               Login
             </Link>
             <Link
-              href="/register"
+              href="/demo"
               className="rounded border border-[#00ffa3] px-4 py-2 text-sm font-medium text-[#00ffa3] transition-colors hover:bg-[#00ffa3] hover:text-black"
             >
               Secure Now
@@ -88,13 +87,19 @@ export default function LandingPage() {
             Frameworks Of OWASP, NIST, SANS, CERT, And NIC.
           </p>
 
+          {/* HERO BUTTONS (Updated to link to /demo) */}
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <button className="group relative overflow-hidden rounded border border-[#00ffa3] px-8 py-3 text-[#00ffa3] transition-all hover:bg-[#00ffa3]/10">
-              <span className="relative z-10 font-medium">Download Free Report</span>
-            </button>
-            <button className="rounded bg-[#00ffa3] px-8 py-3 font-bold text-black shadow-[0_0_20px_rgba(0,255,163,0.4)] transition-transform hover:scale-105">
-              Get Quote
-            </button>
+            <Link href="/demo">
+              <button className="group relative overflow-hidden rounded border border-[#00ffa3] px-8 py-3 text-[#00ffa3] transition-all hover:bg-[#00ffa3]/10">
+                <span className="relative z-10 font-medium">Download Free Report</span>
+              </button>
+            </Link>
+            
+            <Link href="/demo">
+              <button className="rounded bg-[#00ffa3] px-8 py-3 font-bold text-black shadow-[0_0_20px_rgba(0,255,163,0.4)] transition-transform hover:scale-105">
+                Get Quote
+              </button>
+            </Link>
           </div>
 
           {/* Trusted By Logos (Simulated) */}
@@ -103,7 +108,6 @@ export default function LandingPage() {
               100+ Organizations Secured
             </p>
             <div className="flex flex-wrap justify-center gap-8 opacity-50 grayscale transition-all hover:grayscale-0">
-               {/* Just text placeholders for now to keep it clean */}
                {['Flipkart', 'Atlassian', 'Licious', 'Mastercard', 'Government of India'].map((logo) => (
                   <span key={logo} className="text-xl font-bold text-white/40">{logo}</span>
                ))}
@@ -142,16 +146,18 @@ export default function LandingPage() {
                 icon: "🔍",
               },
             ].map((service, i) => (
-              <div
-                key={i}
-                className="group rounded-xl border border-white/10 bg-[#111] p-8 transition-all hover:border-[#00ffa3]/50 hover:bg-[#151515]"
-              >
-                <div className="mb-4 text-4xl">{service.icon}</div>
-                <h3 className="mb-3 text-xl font-bold text-white group-hover:text-[#00ffa3]">
-                  {service.title}
-                </h3>
-                <p className="text-gray-400">{service.desc}</p>
-              </div>
+              /* Wrapped in Link for demo reroute */
+              <Link href="/demo" key={i} className="group block h-full">
+                <div
+                  className="h-full rounded-xl border border-white/10 bg-[#111] p-8 transition-all hover:border-[#00ffa3]/50 hover:bg-[#151515] cursor-pointer"
+                >
+                  <div className="mb-4 text-4xl">{service.icon}</div>
+                  <h3 className="mb-3 text-xl font-bold text-white group-hover:text-[#00ffa3]">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-400">{service.desc}</p>
+                </div>
+              </Link>
             ))}
           </div>
         </div>

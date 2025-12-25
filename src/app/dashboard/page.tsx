@@ -57,14 +57,14 @@ export default function Dashboard() {
     fetchIssues();
   };
 
-  // --- NEW: Delete Issue ---
+  // --- Delete Issue ---
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this issue?")) return;
     await fetch(`/api/issues?id=${id}`, { method: "DELETE" });
-    fetchIssues(); // Refresh list
+    fetchIssues();
   };
 
-  // --- NEW: Toggle Status (Open/Closed) ---
+  // --- Toggle Status ---
   const handleToggleStatus = async (id: string, currentStatus: string) => {
     const newStatus = currentStatus === "OPEN" ? "CLOSED" : "OPEN";
     await fetch(`/api/issues?id=${id}`, {
@@ -72,7 +72,7 @@ export default function Dashboard() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: newStatus }),
     });
-    fetchIssues(); // Refresh list
+    fetchIssues();
   };
 
   const handleLogout = () => {
@@ -89,15 +89,25 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#00ffa3] selection:text-black">
+      {/* --- UPDATED NAVBAR --- */}
       <nav className="border-b border-white/10 bg-[#050505]/80 backdrop-blur-md sticky top-0 z-50">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          
           {/* Left Side: Logo */}
           <div className="flex items-center gap-2">
             <div className="h-6 w-6 rounded bg-[#00ffa3]"></div>
             <span className="text-xl font-bold tracking-wide">Dashboard</span>
           </div>
 
-          {/* Right Side: Profile Link + Logout Button */}
+          {/* Center: Navigation Links (Added) */}
+          <div className="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <Link href="/demo" className="hover:text-white transition-colors">vCISO</Link>
+            <Link href="/demo" className="hover:text-white transition-colors">Cloud Security</Link>
+            <Link href="/demo" className="hover:text-white transition-colors">VAPT</Link>
+          </div>
+
+          {/* Right Side: Profile & Logout */}
           <div className="flex items-center gap-6">
             <Link
               href="/profile"
