@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ApniSec - Enterprise Cyber Security Solutions
 
-## Getting Started
+**[Click Here to View Live Demo](https://apnisec-assignment-opal.vercel.app/)** 🚀
 
-First, run the development server:
+ApniSec is a full-stack Enterprise Security Dashboard...
 
+## 🚀 Tech Stack
+
+* **Framework:** Next.js 15 (App Router)
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS (Cyberpunk/Dark Theme)
+* **Database:** PostgreSQL (via Supabase)
+* **ORM:** Prisma
+* **Authentication:** Custom JWT Auth (HttpOnly Cookies)
+* **Email Service:** Resend
+* **Deployment:** Vercel
+
+## ✨ Key Features
+
+* **Secure Authentication:** Custom implementation using `jose` for JWT signing and verification.
+* **Role-Based Access:** Protected routes middleware ensuring only authenticated users access the dashboard.
+* **Rate Limiting:** Custom OOP-based Rate Limiter (Token Bucket algorithm) protecting API endpoints.
+* **Real-time Notifications:** Automated email alerts for registration and issue reporting.
+* **Issue Management:** Complete CRUD operations for tracking VAPT and Cloud Security issues.
+* **User Profiles:** Profile management with secure update capabilities.
+* **SEO Optimized:** Fully configured metadata and OpenGraph tags.
+
+## 🛠️ Installation & Setup Instructions
+
+Follow these steps to run the project locally on your machine.
+
+### 1. Prerequisites
+* Node.js (v18 or higher)
+* npm
+* A Supabase Account (for PostgreSQL)
+* A Resend Account (for Emails)
+
+### 2. Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Zireael16/apnisec-assignment.git
+cd apnisec-assignment
+```
+### 3. Install Dependencies
+```bash
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 4. Configure Environment Variables
+Create a `.env` file in the root directory and add the following keys:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```env
+# Database Connection (Supabase Transaction Pooler URL recommended)
+DATABASE_URL="postgresql://postgres.[ref]:[password]@aws-0-region.pooler.supabase.com:6543/postgres"
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Security Secrets
+JWT_SECRET="your-super-secret-key-change-this"
 
-## Learn More
+# Email Service API Key (Get this from Resend.com)
+RESEND_API_KEY="re_123456789"
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 5. Setup the Database
+Push the Prisma schema to your Supabase database:
+```bash
+npx prisma generate
+npx prisma db push
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 6. Run the Application
+Start the development server:
+```bash
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Open http://localhost:3000 in your browser.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+📂 Project Structure
+├── src/
+│   ├── app/            # Next.js App Router Pages
+│   ├── lib/
+│   │   ├── handlers/   # API Route Handlers (Controllers)
+│   │   ├── services/   # Business Logic (Service Layer)
+│   │   ├── repositories/ # Database Interactions
+│   │   └── utils/      # Helpers (RateLimiter, etc.)
+│   └── middleware.ts   # Edge Middleware for Auth & Rate Limiting
+├── prisma/             # Database Schema
+├── public/             # Static Assets
+└── README.md           # Documentation
+```
