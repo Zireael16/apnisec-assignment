@@ -1,0 +1,65 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- YOUR DATABASE TABLES START HERE ---
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String   // Will store the hashed password
+  name      String?
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations: One User has many Issues
+  issues    Issue[]
+}
+
+model Issue {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  type        IssueType
+  status      Status    @default(OPEN)
+  priority    Priority  @default(MEDIUM)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  // Relations: An Issue belongs to one User
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+}
+
+// --- ENUMS (Dropdown Options) ---
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum IssueType {
+  CLOUD_SECURITY
+  RETEAM_ASSESSMENT
+  VAPT
+}
+
+enum Status {
+  OPEN
+  IN_PROGRESS
+  CLOSED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
